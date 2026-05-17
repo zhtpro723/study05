@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>安卫泰消毒液</title>
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei","PingFang SC",Arial,sans-serif;}
+    body{
+        min-height:100vh;
+        background:
+            radial-gradient(circle at 10% 8%,rgba(64,158,255,.18),transparent 30%),
+            radial-gradient(circle at 90% 0%,rgba(15,91,167,.12),transparent 28%),
+            linear-gradient(135deg,#eef7ff 0%,#f7fbff 48%,#edf6f1 100%);
+        padding:40px 20px;
+        color:#1e293b;
+    }
+    .wrap{
+        max-width:960px;
+        margin:auto;
+        background:rgba(255,255,255,.94);
+        padding:30px;
+        border-radius:24px;
+        box-shadow:0 22px 60px rgba(15,91,167,0.12);
+        border:1px solid rgba(15,91,167,.08);
+        backdrop-filter:blur(8px);
+    }
+    .page{display:none;}
+    .page.active{display:block;animation:fadeIn 0.45s ease;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    h2{text-align:center;color:#0f5ba7;margin-bottom:20px;font-weight:700;}
+    h2::after{content:'';display:block;width:60px;height:3px;background:#409eff;margin:10px auto;border-radius:3px;}
+    p{line-height:1.8;color:#334155;font-size:16px;margin-bottom:16px;}
+    .page1-title{font-size:30px;font-weight:800;text-align:center;color:#0f5ba7;margin:20px 0;line-height:1.45;}
+    .page1-desc{text-align:center;font-size:17px;color:#475569;margin:12px 0;}
+    .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        padding:14px 34px;
+        border-radius:999px;
+        border:none;
+        font-size:16px;
+        cursor:pointer;
+        margin:10px;
+        transition:all 0.25s;
+        font-weight:700;
+        letter-spacing:.02em;
+    }
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 24px rgba(15,91,167,.18);}
+    .btn-blue{background:linear-gradient(135deg,#0f5ba7,#2d8cf0);color:#fff;}
+    .btn-outline{background:#fff;color:#0f5ba7;border:1px solid rgba(15,91,167,.22);}
+    .btn-center{text-align:center;margin-top:20px;}
+    .tip-text{color:#64748b;font-size:14px;text-align:center;margin:12px 0;}
+    .product-name{font-size:24px;font-weight:bold;color:#0f5ba7;text-align:center;margin-bottom:15px;}
+    .product-intro{
+        text-align:left;
+        font-size:16px;
+        color:#334155;
+        line-height:1.9;
+        margin:18px 0;
+        background:#f8fbff;
+        padding:18px;
+        border-radius:16px;
+        border-left:4px solid #409eff;
+    }
+
+    /* 第二页：手机购物浏览 */
+    .shop-page{padding:2px;}
+    .shop-header{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+        margin-bottom:18px;
+        padding:14px 16px;
+        background:linear-gradient(135deg,#0f5ba7,#2d8cf0);
+        color:#fff;
+        border-radius:18px;
+        box-shadow:0 12px 26px rgba(15,91,167,.18);
+    }
+    .shop-header-title{font-size:18px;font-weight:800;letter-spacing:.02em;}
+    .shop-header-sub{font-size:13px;opacity:.88;margin-top:3px;}
+    .shop-search{
+        min-width:220px;
+        flex:0 0 260px;
+        background:rgba(255,255,255,.18);
+        border:1px solid rgba(255,255,255,.28);
+        border-radius:999px;
+        padding:10px 14px;
+        color:#fff;
+        font-size:14px;
+        text-align:left;
+    }
+    .shop-breadcrumb{
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+        align-items:center;
+        color:#64748b;
+        font-size:13px;
+        margin:8px 4px 16px;
+    }
+    .shop-breadcrumb span{color:#0f5ba7;font-weight:700;}
+    .product-card{
+        display:grid;
+        grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);
+        gap:26px;
+        background:#fff;
+        border-radius:22px;
+        padding:22px;
+        border:1px solid #e6f0fb;
+        box-shadow:0 18px 48px rgba(15,91,167,.10);
+    }
+    .gallery-box{
+        background:linear-gradient(180deg,#f8fbff,#eef7ff);
+        border-radius:22px;
+        padding:16px;
+        border:1px solid #e1efff;
+    }
+    .swiper-container{
+        width:100%;
+        overflow:hidden;
+        border-radius:20px;
+        position:relative;
+        background:#fff;
+        border:1px solid rgba(15,91,167,.08);
+        box-shadow:inset 0 0 0 1px rgba(255,255,255,.65);
+    }
+    .swiper-wrapper{display:flex;transition:transform 0.62s cubic-bezier(0.18, 0.88, 0.28, 1.04);}
+    .swiper-slide{min-width:100%;display:flex;align-items:center;justify-content:center;background:#fff;}
+    .swiper-slide img{width:100%;display:block;border-radius:20px;object-fit:cover;aspect-ratio:1/1;}
+    .gallery-arrow{
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        width:42px;
+        height:42px;
+        border-radius:50%;
+        border:1px solid rgba(15,91,167,.18);
+        background:rgba(255,255,255,.92);
+        color:#0f5ba7;
+        font-size:26px;
+        line-height:1;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:0 10px 20px rgba(15,91,167,.15);
+        transition:all .2s;
+        z-index:2;
+    }
+    .gallery-arrow:hover{background:#0f5ba7;color:#fff;transform:translateY(-50%) scale(1.06);}
+    .gallery-arrow.prev{left:12px;}
+    .gallery-arrow.next{right:12px;}
+    .dots{
+        display:flex;
+        justify-content:center;
+        gap:8px;
+        margin:14px 0 10px;
+    }
+    .dot{
+        width:9px;
+        height:9px;
+        border-radius:50%;
+        border:0;
+        background:#cbd5e1;
+        cursor:pointer;
+        transition:all .2s;
+    }
+    .dot.active{width:24px;border-radius:999px;background:#0f5ba7;}
+    .thumbs{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:10px;
+        margin-top:12px;
+    }
+    .thumb{
+        border:2px solid transparent;
+        border-radius:14px;
+        padding:4px;
+        background:#fff;
+        cursor:pointer;
+        transition:all .2s;
+        box-shadow:0 8px 18px rgba(15,91,167,.08);
+    }
+    .thumb.active{border-color:#0f5ba7;box-shadow:0 10px 22px rgba(15,91,167,.18);}
+    .thumb img{width:100%;display:block;border-radius:10px;aspect-ratio:1/1;object-fit:cover;}
+    .progress-box{
+        margin-top:14px;
+        background:#fff;
+        border:1px solid #e2e8f0;
+        border-radius:14px;
+        padding:12px;
+    }
+    .progress-text{
+        display:flex;
+        justify-content:space-between;
+        gap:12px;
+        font-size:13px;
+        color:#64748b;
+        margin-bottom:8px;
+    }
+    .progress-text strong{color:#0f5ba7;}
+    .progress-track{height:8px;background:#e2e8f0;border-radius:999px;overflow:hidden;}
+    .progress-bar{height:100%;width:25%;background:linear-gradient(90deg,#0f5ba7,#54b4ff);border-radius:999px;transition:width .25s;}
+
+    .product-info{padding:4px 2px;}
+    .store-line{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-bottom:12px;
+        color:#64748b;
+        font-size:14px;
+    }
+    .store-badge{
+        color:#fff;
+        background:#16a34a;
+        border-radius:999px;
+        padding:5px 10px;
+        font-size:12px;
+        font-weight:800;
+    }
+    .shop-product-title{
+        font-size:28px;
+        line-height:1.35;
+        color:#0f172a;
+        font-weight:900;
+        margin:0 0 10px;
+    }
+    .rating-row{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+        color:#64748b;
+        font-size:14px;
+        margin-bottom:14px;
+    }
+    .stars{color:#f59e0b;letter-spacing:1px;font-size:17px;}
+
+    .applicable-panel{
+        margin:18px 0 18px;
+        padding:24px 22px;
+        border-radius:22px;
+        background:
+            radial-gradient(circle at 12% 16%,rgba(64,158,255,.22),transparent 36%),
+            linear-gradient(135deg,#f0f8ff,#ffffff 56%,#f4fbf7);
+        border:1px solid #d7eaff;
+        box-shadow:0 16px 34px rgba(15,91,167,.10);
+        text-align:left;
+    }
+    .applicable-label{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:7px 13px;
+        border-radius:999px;
+        background:#0f5ba7;
+        color:#fff;
+        font-size:15px;
+        font-weight:900;
+        letter-spacing:.06em;
+        margin-bottom:12px;
+    }
+    .applicable-text{
+        color:#0f172a;
+        font-size:clamp(30px,4.5vw,48px);
+        line-height:1.18;
+        font-weight:900;
+        letter-spacing:-.04em;
+    }
+
+    .price-box{
+        display:flex;
+        align-items:baseline;
+        gap:12px;
+        flex-wrap:wrap;
+        background:linear-gradient(135deg,#fff4ed,#fff9f4);
+        border:1px solid #fed7aa;
+        border-radius:18px;
+        padding:16px;
+        margin:16px 0;
+    }
+    .price-label{color:#9a3412;font-size:13px;font-weight:800;}
+    .price{font-size:34px;color:#ea580c;font-weight:900;}
+    .price small{font-size:16px;margin-right:2px;}
+    .coupon{background:#fff;color:#ea580c;border:1px solid #fdba74;border-radius:8px;padding:5px 8px;font-size:12px;font-weight:800;}
+    .quick-tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;}
+    .quick-tags span{
+        color:#0f5ba7;
+        background:#edf6ff;
+        border:1px solid #d7eaff;
+        border-radius:999px;
+        padding:7px 10px;
+        font-size:13px;
+        font-weight:700;
+    }
+    .feature-grid{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+        margin:16px 0;
+    }
+    .feature-card{
+        background:#f8fbff;
+        border:1px solid #e3effc;
+        border-radius:14px;
+        padding:12px;
+    }
+    .feature-card strong{display:block;color:#0f5ba7;margin-bottom:4px;font-size:15px;}
+    .feature-card span{color:#64748b;font-size:13px;line-height:1.6;}
+    .service-row{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:8px;
+        margin:16px 0;
+    }
+    .service-item{
+        text-align:center;
+        padding:11px 8px;
+        border-radius:14px;
+        background:#f8fafc;
+        border:1px solid #e2e8f0;
+        color:#475569;
+        font-size:13px;
+        font-weight:700;
+    }
+    .shop-actions{
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        margin-top:18px;
+        align-items:center;
+    }
+    .next-btn{
+        margin:0;
+        min-width:190px;
+        display:inline-flex;
+        box-shadow:0 14px 26px rgba(15,91,167,.18);
+    }
+    .next-btn:disabled{
+        background:#cbd5e1;
+        cursor:not-allowed;
+        color:#fff;
+        box-shadow:none;
+        transform:none;
+    }
+    .minor-note{
+        flex:1;
+        min-width:220px;
+        color:#64748b;
+        font-size:13px;
+        line-height:1.7;
+        margin:0;
+    }
+    .detail-section{
+        margin-top:18px;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:14px;
+    }
+    .detail-panel{
+        background:#fff;
+        border:1px solid #e6f0fb;
+        border-radius:18px;
+        padding:16px;
+        box-shadow:0 12px 30px rgba(15,91,167,.06);
+    }
+    .detail-panel h3{font-size:16px;color:#0f5ba7;margin-bottom:10px;}
+    .detail-panel ul{list-style:none;display:grid;gap:8px;}
+    .detail-panel li{color:#475569;font-size:14px;line-height:1.6;padding-left:20px;position:relative;}
+    .detail-panel li::before{content:"✓";position:absolute;left:0;color:#16a34a;font-weight:900;}
+
+    .q-item{margin-bottom:25px;background:#f8fbff;padding:18px;border-radius:14px;border:1px solid #e6f0fb;}
+    .q-title{font-size:16px;color:#0f5ba7;margin-bottom:14px;font-weight:700;}
+    .option{display:block;margin:10px 0;font-size:15px;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;color:#334155;cursor:pointer;background:#fff;transition:all .2s;}
+    .option:hover{border-color:#93c5fd;background:#f8fbff;}
+    .option input{margin-right:8px;accent-color:#0f5ba7;}
+    .text-input{width:100%;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;font-size:15px;outline:none;}
+    .score-slider{width:100%;height:16px;border-radius:999px;appearance:none;background:linear-gradient(to right,#0f5ba7 50%,#e2e8f0 50%);}
+    .score-slider::-webkit-slider-thumb{appearance:none;width:32px;height:32px;border-radius:50%;background:#fff;border:4px solid #0f5ba7;box-shadow:0 4px 12px rgba(15,91,167,.18);}
+    .score-text{font-size:22px;font-weight:bold;color:#0f5ba7;text-align:center;}
+    .likert-options{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:12px;}
+    .likert-option{border:1px solid #e2e8f0;border-radius:10px;padding:10px 6px;text-align:center;font-size:13px;cursor:pointer;background:#fff;transition:all .2s;}
+    .likert-option:hover{border-color:#93c5fd;background:#f8fbff;}
+    .likert-option input{accent-color:#0f5ba7;}
+    .lottery-submit-box{width:100%;border:2px solid #0f5ba7;color:#0f5ba7;background:#f0f7ff;border-radius:16px;padding:18px;text-align:center;font-size:18px;font-weight:bold;cursor:pointer;margin-top:20px;transition:all .2s;}
+    .lottery-submit-box:hover{background:#0f5ba7;color:#fff;transform:translateY(-2px);}
+    .result-page{text-align:center;padding:60px 20px;}
+    .result-text{font-size:26px;font-weight:bold;color:#334155;margin-bottom:20px;}
+
+    @media (max-width:760px){
+        body{padding:22px 12px;}
+        .wrap{padding:18px;border-radius:20px;}
+        .shop-header{align-items:flex-start;flex-direction:column;}
+        .shop-search{min-width:0;width:100%;flex:auto;}
+        .product-card{grid-template-columns:1fr;padding:14px;gap:18px;}
+        .shop-product-title{font-size:23px;}
+        .price{font-size:30px;}
+        .applicable-text{font-size:30px;}
+        .feature-grid,.detail-section{grid-template-columns:1fr;}
+        .service-row{grid-template-columns:1fr 1fr;}
+        .gallery-arrow{width:38px;height:38px;font-size:23px;}
+        .likert-options{grid-template-columns:repeat(4,1fr);}
+    }
+
+
+    /* 手机浏览版布局优化 */
+    body{
+        padding:18px 10px;
+        background:#dfe7f1;
+    }
+    .wrap{
+        max-width:430px;
+        min-height:calc(100vh - 36px);
+        padding:0;
+        overflow:hidden;
+        border-radius:34px;
+        background:#f5f7fb;
+        box-shadow:0 28px 80px rgba(15,23,42,.24);
+        border:8px solid #111827;
+        position:relative;
+    }
+    .page{
+        min-height:calc(100vh - 52px);
+        padding:18px 14px 28px;
+    }
+    #page1,#page3,#page4{
+        background:#fff;
+    }
+    #page2{
+        padding:0 0 92px;
+        background:#f5f7fb;
+    }
+    .mobile-appbar{
+        position:sticky;
+        top:0;
+        z-index:20;
+        height:58px;
+        display:flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 12px;
+        background:rgba(255,255,255,.94);
+        backdrop-filter:blur(12px);
+        border-bottom:1px solid rgba(226,232,240,.9);
+    }
+    .mobile-icon-btn{
+        flex:0 0 auto;
+        width:36px;
+        height:36px;
+        border:0;
+        border-radius:50%;
+        background:#f1f5f9;
+        color:#0f172a;
+        font-size:22px;
+        font-weight:800;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+    }
+    .mobile-search-pill{
+        flex:1;
+        height:36px;
+        border-radius:999px;
+        background:#eef4fb;
+        color:#64748b;
+        display:flex;
+        align-items:center;
+        padding:0 13px;
+        font-size:13px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+    .mobile-app-icons{
+        display:flex;
+        gap:6px;
+    }
+    .shop-header{
+        margin:10px 12px 8px;
+        padding:13px 14px;
+        border-radius:18px;
+        box-shadow:0 10px 22px rgba(15,91,167,.16);
+    }
+    .shop-header-title{
+        font-size:16px;
+    }
+    .shop-header-sub{
+        font-size:12px;
+    }
+    .shop-search{
+        min-width:0;
+        width:100%;
+        flex:auto;
+        padding:8px 12px;
+        font-size:12px;
+    }
+    .shop-breadcrumb{
+        margin:10px 14px 8px;
+        font-size:12px;
+        color:#94a3b8;
+    }
+    .product-card{
+        display:block;
+        margin:12px;
+        padding:0;
+        border:0;
+        border-radius:22px;
+        background:transparent;
+        box-shadow:none;
+    }
+    .gallery-box{
+        padding:10px;
+        border-radius:24px;
+        background:#fff;
+        border:1px solid #e6f0fb;
+        box-shadow:0 14px 34px rgba(15,91,167,.08);
+    }
+    .swiper-container{
+        border-radius:22px;
+        box-shadow:none;
+    }
+    .swiper-slide img{
+        border-radius:22px;
+        aspect-ratio:1/1;
+        object-fit:cover;
+    }
+    .gallery-arrow{
+        width:38px;
+        height:38px;
+        background:rgba(15,23,42,.58);
+        color:#fff;
+        border:0;
+        box-shadow:0 8px 18px rgba(15,23,42,.22);
+    }
+    .gallery-arrow:hover{
+        background:rgba(15,23,42,.72);
+        transform:translateY(-50%);
+    }
+    .dots{
+        margin:12px 0 8px;
+    }
+    .thumbs{
+        display:flex;
+        overflow-x:auto;
+        gap:9px;
+        padding:2px 2px 6px;
+        scrollbar-width:none;
+    }
+    .thumbs::-webkit-scrollbar{
+        display:none;
+    }
+    .thumb{
+        flex:0 0 62px;
+        width:62px;
+        border-radius:13px;
+        padding:3px;
+    }
+    .thumb img{
+        border-radius:9px;
+    }
+    .progress-box{
+        margin-top:10px;
+        padding:10px;
+        border-radius:16px;
+        background:#f8fbff;
+    }
+    .progress-text{
+        font-size:12px;
+    }
+    .tip-text{
+        font-size:12px;
+        line-height:1.55;
+        margin:9px 0 0;
+    }
+    .product-info{
+        margin-top:12px;
+        padding:16px 14px;
+        border-radius:24px;
+        background:#fff;
+        border:1px solid #e6f0fb;
+        box-shadow:0 14px 34px rgba(15,91,167,.08);
+    }
+    .store-line{
+        margin-bottom:10px;
+        font-size:12px;
+    }
+    .store-badge{
+        font-size:11px;
+        padding:4px 9px;
+    }
+    .shop-product-title{
+        font-size:25px;
+        line-height:1.25;
+        margin-bottom:10px;
+        letter-spacing:-.03em;
+    }
+    .rating-row{
+        gap:8px;
+        font-size:13px;
+        margin-bottom:12px;
+    }
+    .stars{
+        font-size:15px;
+    }
+    .applicable-panel{
+        margin:14px 0;
+        padding:20px 16px;
+        border-radius:22px;
+        background:
+            radial-gradient(circle at 14% 12%,rgba(64,158,255,.20),transparent 34%),
+            linear-gradient(135deg,#f0f8ff,#ffffff 58%,#f4fbf7);
+    }
+    .applicable-label{
+        font-size:13px;
+        padding:6px 11px;
+        margin-bottom:10px;
+    }
+    .applicable-text{
+        font-size:31px;
+        line-height:1.18;
+        letter-spacing:-.045em;
+    }
+    .price-box{
+        margin:14px 0;
+        padding:15px;
+        border-radius:20px;
+    }
+    .price-label{
+        width:100%;
+        font-size:12px;
+    }
+    .price{
+        font-size:38px;
+    }
+    .coupon{
+        font-size:12px;
+        border-radius:999px;
+    }
+    .shop-actions{
+        margin-top:14px;
+        display:none;
+    }
+    .mobile-bottom-bar{
+        position:fixed;
+        left:50%;
+        bottom:18px;
+        transform:translateX(-50%);
+        z-index:60;
+        width:min(414px,calc(100vw - 34px));
+        display:grid;
+        grid-template-columns:118px 1fr;
+        gap:10px;
+        padding:10px;
+        border-radius:22px;
+        background:rgba(255,255,255,.96);
+        box-shadow:0 18px 46px rgba(15,23,42,.24);
+        border:1px solid rgba(226,232,240,.95);
+        backdrop-filter:blur(14px);
+    }
+    .bottom-mini-actions{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:4px;
+        align-items:center;
+    }
+    .bottom-mini-actions span{
+        text-align:center;
+        color:#475569;
+        font-size:12px;
+        font-weight:800;
+    }
+    .mobile-next-fixed{
+        border:0;
+        border-radius:16px;
+        background:linear-gradient(135deg,#0f5ba7,#2d8cf0);
+        color:#fff;
+        font-size:15px;
+        font-weight:900;
+        cursor:pointer;
+        min-height:46px;
+        box-shadow:0 12px 24px rgba(15,91,167,.22);
+    }
+    .mobile-next-fixed:disabled{
+        background:#cbd5e1;
+        box-shadow:none;
+        cursor:not-allowed;
+    }
+    .q-item{
+        padding:16px;
+    }
+    .likert-options{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    @media (min-width:761px){
+        .product-card{
+            grid-template-columns:1fr;
+        }
+    }
+    @media (max-width:480px){
+        body{
+            padding:0;
+            background:#f5f7fb;
+        }
+        .wrap{
+            width:100%;
+            max-width:none;
+            min-height:100vh;
+            border:0;
+            border-radius:0;
+            box-shadow:none;
+        }
+        .page{
+            min-height:100vh;
+        }
+        .mobile-bottom-bar{
+            bottom:10px;
+            width:calc(100vw - 20px);
+        }
+        .applicable-text{
+            font-size:30px;
+        }
+    }
+
+
+    /* 本次按要求精简：去掉分类、商品基础信息、底部辅助入口 */
+    .shop-header{
+        display:block;
+    }
+    .mobile-bottom-bar{
+        grid-template-columns:1fr !important;
+    }
+    .mobile-next-fixed{
+        width:100%;
+    }
+    .product-info{
+        padding-top:14px;
+    }
+
+    /* 商品图片切换：降低灵敏度 + 增加顿挫感 */
+    .swiper-container{
+        touch-action:pan-y;
+        overscroll-behavior:contain;
+    }
+    .swiper-wrapper.is-switching{
+        filter:saturate(.96);
+    }
+    .swiper-wrapper.is-switching .swiper-slide img{
+        transform:scale(.985);
+    }
+    .swiper-slide img{
+        transition:transform .34s ease, filter .34s ease;
+        will-change:transform;
+    }
+
+
+    /* 商品大图预览 */
+    .image-preview-mask{
+        position:fixed;
+        inset:0;
+        z-index:999;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        background:rgba(15,23,42,.92);
+        backdrop-filter:blur(10px);
+        padding:20px;
+    }
+    .image-preview-mask.active{
+        display:flex;
+        animation:previewFadeIn .22s ease;
+    }
+    @keyframes previewFadeIn{
+        from{opacity:0;}
+        to{opacity:1;}
+    }
+    .image-preview-panel{
+        width:min(430px,100%);
+        position:relative;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:12px;
+    }
+    .preview-image-box{
+        width:100%;
+        min-height:280px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:24px;
+        overflow:hidden;
+        background:#fff;
+        box-shadow:0 24px 60px rgba(0,0,0,.35);
+    }
+    .preview-image-box img{
+        width:100%;
+        max-height:72vh;
+        object-fit:contain;
+        display:block;
+        transition:transform .46s cubic-bezier(.18,.88,.28,1.04), opacity .28s ease;
+        will-change:transform,opacity;
+    }
+    .image-preview-mask.is-changing .preview-image-box img{
+        transform:scale(.985);
+        opacity:.92;
+    }
+    .preview-close{
+        position:absolute;
+        top:-54px;
+        right:0;
+        width:42px;
+        height:42px;
+        border:0;
+        border-radius:50%;
+        background:rgba(255,255,255,.18);
+        color:#fff;
+        font-size:28px;
+        line-height:1;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .preview-arrow{
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        width:42px;
+        height:42px;
+        border:0;
+        border-radius:50%;
+        background:rgba(255,255,255,.22);
+        color:#fff;
+        font-size:32px;
+        line-height:1;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:0 10px 24px rgba(0,0,0,.2);
+    }
+    .preview-arrow.prev{left:8px;}
+    .preview-arrow.next{right:8px;}
+    .preview-counter{
+        color:#fff;
+        font-size:14px;
+        font-weight:800;
+        letter-spacing:.03em;
+        background:rgba(255,255,255,.14);
+        border:1px solid rgba(255,255,255,.18);
+        border-radius:999px;
+        padding:7px 14px;
+    }
+    .preview-hint{
+        color:rgba(255,255,255,.72);
+        font-size:12px;
+        margin:0;
+    }
+    .swiper-slide img{
+        cursor:zoom-in;
+    }
+    body.preview-open{
+        overflow:hidden;
+    }
+    @media (max-width:480px){
+        .image-preview-mask{
+            padding:16px;
+        }
+        .preview-close{
+            top:14px;
+            right:14px;
+            position:fixed;
+            background:rgba(15,23,42,.45);
+        }
+        .preview-arrow{
+            width:40px;
+            height:40px;
+            font-size:30px;
+        }
+        .preview-arrow.prev{left:14px;}
+        .preview-arrow.next{right:14px;}
+        .preview-image-box{
+            border-radius:20px;
+        }
+    }
+
+
+    /* 七点文字李克特选项：适配较长选项文案 */
+    .text-likert{
+        grid-template-columns:1fr !important;
+        gap:9px;
+    }
+    .text-likert .likert-option{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        gap:8px;
+        text-align:left;
+        padding:12px 14px;
+        font-size:14px;
+        line-height:1.45;
+    }
+    .text-likert .likert-option input{
+        flex:0 0 auto;
+        accent-color:#0f5ba7;
+    }
+
+
+    /* 三部分分组题目框 */
+    .q-group-box{
+        margin-bottom:24px;
+        padding:18px;
+        border-radius:18px;
+        background:linear-gradient(180deg,#f8fbff,#ffffff);
+        border:1px solid #dbeafe;
+        box-shadow:0 12px 26px rgba(15,91,167,.07);
+    }
+    .q-group-title{
+        font-size:17px;
+        color:#0f5ba7;
+        font-weight:900;
+        margin-bottom:14px;
+        padding-bottom:10px;
+        border-bottom:1px solid #e2e8f0;
+    }
+    .sub-q-item{
+        margin-top:16px;
+        padding:14px;
+        border-radius:14px;
+        background:#ffffff;
+        border:1px solid #e6f0fb;
+    }
+    .sub-q-title{
+        font-size:15px;
+        color:#1e293b;
+        font-weight:800;
+        line-height:1.65;
+        margin-bottom:12px;
+    }
+    .compact-likert{
+        grid-template-columns:1fr !important;
+    }
+    .compact-likert .likert-option{
+        font-size:13px;
+        padding:10px 12px;
+    }
+
+
+    /* 第三页压缩版：矩阵问卷样式，减少页面长度 */
+    #page3{
+        padding:16px 12px 28px;
+    }
+    #page3 h2{
+        margin-bottom:14px;
+    }
+    #page3 .q-item{
+        margin-bottom:15px;
+        padding:14px;
+        border-radius:16px;
+    }
+    #page3 .q-group-box{
+        margin-bottom:16px;
+        padding:14px;
+        border-radius:18px;
+    }
+    #page3 .q-group-title{
+        font-size:16px;
+        margin-bottom:10px;
+        padding-bottom:8px;
+    }
+    .scale-legend{
+        display:flex;
+        flex-wrap:wrap;
+        gap:6px;
+        margin:8px 0 10px;
+    }
+    .scale-legend span{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:5px 7px;
+        border-radius:999px;
+        background:#eef6ff;
+        color:#0f5ba7;
+        border:1px solid #d7eaff;
+        font-size:11px;
+        font-weight:800;
+        line-height:1.25;
+    }
+    #page3 .sub-q-item{
+        margin-top:8px;
+        padding:10px 0 2px;
+        border:0;
+        border-top:1px solid #e6f0fb;
+        border-radius:0;
+        background:transparent;
+    }
+    #page3 .sub-q-item:first-of-type{
+        border-top:0;
+        padding-top:2px;
+    }
+    #page3 .sub-q-title{
+        font-size:14px;
+        line-height:1.45;
+        margin-bottom:8px;
+    }
+    #page3 .number-likert{
+        display:grid !important;
+        grid-template-columns:repeat(7,1fr) !important;
+        gap:5px;
+        margin-top:6px;
+    }
+    #page3 .number-likert .likert-option{
+        min-height:34px;
+        padding:7px 0;
+        justify-content:center;
+        text-align:center;
+        font-size:13px;
+        font-weight:800;
+        border-radius:10px;
+    }
+    #page3 .number-likert .likert-option input{
+        margin:0 3px 0 0;
+    }
+    #page3 .option{
+        margin:7px 0;
+        padding:10px 12px;
+    }
+    #page3 .text-input{
+        padding:10px 12px;
+    }
+    @media (max-width:480px){
+        .scale-legend span{
+            font-size:10.5px;
+            padding:4px 6px;
+        }
+        #page3 .number-likert{
+            gap:4px;
+        }
+        #page3 .number-likert .likert-option{
+            font-size:12px;
+            min-height:32px;
+        }
+    }
+
+
+    .lottery-submit-box.is-saving{
+        opacity:.72;
+        pointer-events:none;
+        cursor:not-allowed;
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+<!-- 1 -->
+<div class="page active" id="page1">
+<div class="page1-title">参与调研<br/>赢取安卫泰消毒液</div>
+<p class="page1-desc">您的意见对我们至关重要，完成调研即可参与抽奖</p>
+<div class="btn-center">
+<button class="btn btn-blue" onclick="goPage(2)">了解产品</button>
+</div>
+</div>
+<!-- 2 商品浏览页 -->
+<div class="page shop-page" id="page2"><div class="mobile-appbar"><button aria-label="返回" class="mobile-icon-btn" type="button">‹</button><div class="mobile-search-pill">搜索 安卫泰消毒液</div><div class="mobile-app-icons"><button class="mobile-icon-btn" type="button">♡</button><button class="mobile-icon-btn" type="button">🛒</button></div></div>
+<div class="shop-header">
+<div>
+<div class="shop-header-title">安卫泰官方旗舰店</div>
+<div class="shop-header-sub">手机端商品浏览 · 看完图片后进入问卷</div>
+</div>
+</div>
+<div class="shop-breadcrumb">首页 / 家居清洁 / <span>安卫泰消毒液</span></div>
+<section class="product-card">
+<div class="gallery-box">
+<div class="swiper-container" id="swiper">
+
+<button aria-label="上一张" class="gallery-arrow prev" id="prevImg" type="button">‹</button>
+<div class="swiper-wrapper" id="swiperWrap">
+<div class="swiper-slide"><img alt="安卫泰消毒液商品图1" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKwtqCVONF8nTAbOOPSQUueydmWckEgACZCAAAgJ_SFR_wm9rquH4aTsE.png"/></div>
+<div class="swiper-slide"><img alt="安卫泰消毒液商品图2" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKw9qCVO4rGPlsClQy-Ddv-DfmAJJDAACaCAAAgJ_SFTqh8skFb7AozsE.png"/></div>
+<div class="swiper-slide"><img alt="安卫泰消毒液商品图3" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKxFqCVPtSZYlL92nZ4P6odp1uM5xzwACayAAAgJ_SFSaZs3nkG_QmjsE.png"/></div>
+<div class="swiper-slide"><img alt="安卫泰消毒液商品图4" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKxNqCVRdvKjSB5HEH46gfoBU6lj0AwACbSAAAgJ_SFS0xOYjZfjCajsE.png"/></div>
+</div>
+<button aria-label="下一张" class="gallery-arrow next" id="nextImg" type="button">›</button>
+</div>
+<div aria-label="图片分页指示器" class="dots" id="dots">
+<button class="dot active" data-i="0" type="button"></button>
+<button class="dot" data-i="1" type="button"></button>
+<button class="dot" data-i="2" type="button"></button>
+<button class="dot" data-i="3" type="button"></button>
+</div>
+<div class="thumbs" id="thumbs">
+<button class="thumb active" data-i="0" type="button"><img alt="缩略图1" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKwtqCVONF8nTAbOOPSQUueydmWckEgACZCAAAgJ_SFR_wm9rquH4aTsE.png"/></button>
+<button class="thumb" data-i="1" type="button"><img alt="缩略图2" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKw9qCVO4rGPlsClQy-Ddv-DfmAJJDAACaCAAAgJ_SFTqh8skFb7AozsE.png"/></button>
+<button class="thumb" data-i="2" type="button"><img alt="缩略图3" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKxFqCVPtSZYlL92nZ4P6odp1uM5xzwACayAAAgJ_SFSaZs3nkG_QmjsE.png"/></button>
+<button class="thumb" data-i="3" type="button"><img alt="缩略图4" src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEUKxNqCVRdvKjSB5HEH46gfoBU6lj0AwACbSAAAgJ_SFS0xOYjZfjCajsE.png"/></button>
+</div>
+<div class="progress-box">
+<div class="progress-text">
+<span>当前第 <strong><span id="currentNum">1</span></strong>/4 张</span>
+<span>已浏览 <strong><span id="viewNum">1</span></strong>/4 张</span>
+</div>
+<div class="progress-track"><div class="progress-bar" id="viewProgress"></div></div>
+<p class="tip-text">点击图片左右按钮或缩略图切换，手机端也可轻扫浏览。</p>
+</div>
+</div>
+<div class="product-info">
+<div class="price-box">
+<span class="price-label">调研试用福利</span>
+<span class="price"><small>¥</small>0</span>
+<span class="coupon">完成问卷参与抽奖</span>
+</div>
+<div class="shop-actions">
+<button class="btn btn-blue next-btn" disabled="" id="nextBtn" onclick="goPage(3)">浏览全部图片后继续</button>
+<p class="minor-note">请先浏览全部 4 张商品图，再进入下一页问卷。</p>
+</div>
+</div>
+</section>
+<div class="mobile-bottom-bar"><button class="mobile-next-fixed" disabled="disabled" id="mobileNextBtn" type="button">浏览全部图片后继续</button></div>
+<div class="image-preview-mask" id="imagePreviewMask" aria-hidden="true">
+    <div class="image-preview-panel">
+        <button class="preview-close" id="previewCloseBtn" type="button" aria-label="关闭大图">×</button>
+        <button class="preview-arrow prev" id="previewPrevBtn" type="button" aria-label="上一张">‹</button>
+        <div class="preview-image-box" id="previewImageBox">
+            <img id="previewImage" alt="商品大图预览" src=""/>
+        </div>
+        <button class="preview-arrow next" id="previewNextBtn" type="button" aria-label="下一张">›</button>
+        <div class="preview-counter"><span id="previewCurrent">1</span> / <span id="previewTotal">4</span></div>
+        <p class="preview-hint">左右滑动或点击按钮切换，点击 × 关闭</p>
+    </div>
+</div>
+</div>
+<!-- 3 -->
+<div class="page" id="page3">
+<h2>调查问卷</h2>
+<p class="tip-text">每组只需按直觉选择 1–7 分，数字含义见各组上方说明。</p>
+<form id="surveyForm">
+<div class="q-item">
+<div class="q-title">1. 您是否感觉到设备震动？</div>
+<label class="option"><input name="check" type="radio" value="是"/> 是</label>
+<label class="option"><input name="check" type="radio" value="否"/> 否</label>
+</div>
+<div class="q-group-box">
+<div class="q-group-title">2. 功效感知</div>
+<div class="scale-legend">
+<span>1 效果一点都不好</span><span>2 不好</span><span>3 较不好</span><span>4 不确定</span><span>5 较好</span><span>6 好</span><span>7 效果非常好</span>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">你认为这款消毒液在抑菌除菌方面效果怎么样？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="efficacy_1" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="efficacy_1" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">你认为这款消毒液能帮助你提升日常居家环境防护能力吗？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="efficacy_2" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="efficacy_2" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">你认为这款消毒液在维持居家洁净健康环境方面在多大程度上有效？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="efficacy_3" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="efficacy_3" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">你认为这款消毒液中的抑菌有效成分在多大程度上有效？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="efficacy_4" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="efficacy_4" type="radio" value="7"/>7</label>
+</div>
+</div>
+</div>
+
+<div class="q-group-box">
+<div class="q-group-title">3. 身体稳定性感受</div>
+<div class="scale-legend">
+<span>1 一点也没有</span><span>2 稍微有一点</span><span>3 有一点</span><span>4 中等程度</span><span>5 比较明显</span><span>6 很明显</span><span>7 非常多</span>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">此刻，你在多大程度上感受到身体不稳定的状态？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="body_stability_1" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="body_stability_1" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">此刻，我感受到了身体不稳定的状态。</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="body_stability_2" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="body_stability_2" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">此刻，你在多大程度上感受到身体稳定的状态？</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="body_stability_3" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="body_stability_3" type="radio" value="7"/>7</label>
+</div>
+</div>
+</div>
+
+<div class="q-group-box">
+<div class="q-group-title">4. 产品构成稳定性感受</div>
+<div class="scale-legend">
+<span>1 一点也没有</span><span>2 稍微有一点</span><span>3 有一点</span><span>4 中等程度</span><span>5 比较明显</span><span>6 很明显</span><span>7 非常多</span>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚才浏览网站上的产品时，你在多大程度上感受到图片中的产品构成不稳定</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="product_structure_unstable_1" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚才浏览网站上的产品时，你在多大程度上感受到图片中的产品构成不稳固</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="product_structure_unstable_2" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚才浏览网站上的产品时，你在多大程度上感受到图片中的产品构成很稳定</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="product_structure_stable_1" type="radio" value="7"/>7</label>
+</div>
+</div>
+</div>
+<div class="q-item">
+<div class="q-title">5. 这个产品净含量是多少升（L）？</div>
+<label class="option"><input name="ft" type="radio" value="1"/>1</label>
+<label class="option"><input name="ft" type="radio" value="2"/>2</label>
+<label class="option"><input name="ft" type="radio" value="3"/>3</label>
+<label class="option"><input name="ft" type="radio" value="4"/>4</label>
+</div>
+<div class="q-group-box">
+<div class="q-group-title">6. 网站浏览感受</div>
+<div class="scale-legend">
+<span>1 非常不同意</span><span>2 不同意</span><span>3 有点不同意</span><span>4 中立</span><span>5 有点同意</span><span>6 同意</span><span>7 非常同意</span>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚刚浏览的该网站让我感到疲惫</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="web_fatigue" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="web_fatigue" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚刚浏览的该网站让我感到烦躁</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="web_irritated" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="web_irritated" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚刚浏览的该网站让我感到懊恼</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="web_annoyed" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="web_annoyed" type="radio" value="7"/>7</label>
+</div>
+</div>
+<div class="sub-q-item">
+<div class="sub-q-title">刚刚浏览的该网站让我感到无聊</div>
+<div class="likert-options number-likert">
+<label class="likert-option"><input name="web_bored" type="radio" value="1"/>1</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="2"/>2</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="3"/>3</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="4"/>4</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="5"/>5</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="6"/>6</label>
+<label class="likert-option"><input name="web_bored" type="radio" value="7"/>7</label>
+</div>
+</div>
+</div>
+
+<div class="q-item">
+<div class="q-title">7. 性别</div>
+<label class="option"><input name="gender" type="radio" value="男"/>男</label>
+<label class="option"><input name="gender" type="radio" value="女"/>女</label>
+</div>
+<div class="q-item">
+<div class="q-title">8. 年龄</div>
+<input class="text-input" name="age" placeholder="请输入年龄" type="number"/>
+</div>
+<div class="lottery-submit-box" onclick="submit()">提交并参与抽奖</div>
+</form>
+</div>
+<!-- 4 -->
+<div class="page" id="page4">
+<div class="result-page">
+<div class="result-text">感谢参与，您未中奖！</div>
+<p>安卫泰消毒液守护您与家人健康</p>
+</div>
+</div>
+</div>
+<script>
+    // 页面切换
+    function goPage(n){
+        document.querySelectorAll('.page').forEach(function(p){
+            p.classList.remove('active');
+        });
+
+        const target=document.getElementById('page'+n);
+        if(target){
+            target.classList.add('active');
+        }
+
+        window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    // 第二页商品图片浏览：按钮、圆点、缩略图、手机轻扫
+    // 本版：降低切换灵敏度，并加入轻微顿挫感
+    const swiperWrap=document.getElementById('swiperWrap');
+    const swiper=document.getElementById('swiper');
+    const slides=swiperWrap ? swiperWrap.children.length : 0;
+    let idx=0;
+    const viewed=new Set([0]);
+
+    const SWITCH_THRESHOLD=95;      // 横向滑动超过 95px 才切换
+    const SWITCH_COOLDOWN=680;      // 每次切换后 680ms 内不能再次切换
+    const VERTICAL_LOCK_RATIO=0.72; // 竖向滑动更明显时，只滚动页面，不切图
+    let lastSwitchTime=0;
+
+    function playSwitchFeedback(){
+        if(!swiperWrap) return;
+        swiperWrap.classList.add('is-switching');
+        window.setTimeout(function(){
+            swiperWrap.classList.remove('is-switching');
+        },260);
+    }
+
+    function canSwitch(){
+        return Date.now()-lastSwitchTime>SWITCH_COOLDOWN;
+    }
+
+    function setGalleryIndex(nextIndex){
+        if(!swiperWrap || slides===0) return;
+        if(!canSwitch()) return;
+
+        idx=(nextIndex+slides)%slides;
+        viewed.add(idx);
+        lastSwitchTime=Date.now();
+        strongHapticFeedback('switch');
+
+        playSwitchFeedback();
+        swiperWrap.style.transform='translateX(-'+(idx*100)+'%)';
+        updateGalleryUI();
+        syncPreviewToGallery();
+    }
+
+    function updateGalleryUI(){
+        const currentNum=document.getElementById('currentNum');
+        const viewNum=document.getElementById('viewNum');
+        const progress=document.getElementById('viewProgress');
+        const nextBtn=document.getElementById('nextBtn');
+        const mobileNextBtn=document.getElementById('mobileNextBtn');
+
+        if(currentNum) currentNum.textContent=idx+1;
+        if(viewNum) viewNum.textContent=viewed.size;
+        if(progress && slides>0) progress.style.width=((viewed.size/slides)*100)+'%';
+
+        document.querySelectorAll('.dot').forEach(function(el,i){
+            el.classList.toggle('active',i===idx);
+        });
+
+        document.querySelectorAll('.thumb').forEach(function(el,i){
+            el.classList.toggle('active',i===idx);
+        });
+
+        if(viewed.size>=slides){
+            if(nextBtn){
+                nextBtn.disabled=false;
+                nextBtn.textContent='继续填写问卷';
+            }
+            if(mobileNextBtn){
+                mobileNextBtn.disabled=false;
+                mobileNextBtn.textContent='继续填写问卷';
+            }
+        }
+    }
+
+    const prevImg=document.getElementById('prevImg');
+    const nextImg=document.getElementById('nextImg');
+
+    if(prevImg){
+        prevImg.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            setGalleryIndex(idx-1);
+        });
+    }
+
+    if(nextImg){
+        nextImg.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            setGalleryIndex(idx+1);
+        });
+    }
+
+    document.querySelectorAll('.dot,.thumb').forEach(function(btn){
+        btn.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            setGalleryIndex(Number(btn.dataset.i));
+        });
+    });
+
+    let startX=0;
+    let startY=0;
+    let touching=false;
+
+    if(swiper){
+        swiper.addEventListener('touchstart',function(e){
+            if(!e.touches || !e.touches[0]) return;
+            startX=e.touches[0].clientX;
+            startY=e.touches[0].clientY;
+            touching=true;
+        },{passive:true});
+
+        swiper.addEventListener('touchend',function(e){
+            if(!touching || !e.changedTouches || !e.changedTouches[0]) return;
+            touching=false;
+
+            const dx=e.changedTouches[0].clientX-startX;
+            const dy=e.changedTouches[0].clientY-startY;
+
+            // 竖向滑动页面时，不触发图片切换
+            if(Math.abs(dy)>Math.abs(dx)*VERTICAL_LOCK_RATIO) return;
+
+            // 横向滑动距离不够，不切换
+            if(Math.abs(dx)<SWITCH_THRESHOLD) return;
+
+            if(dx<0){ strongHapticFeedback('swipe'); setGalleryIndex(idx+1); }
+            if(dx>0){ strongHapticFeedback('swipe'); setGalleryIndex(idx-1); }
+        },{passive:true});
+    }
+
+    const mobileNextBtn=document.getElementById('mobileNextBtn');
+    if(mobileNextBtn){
+        mobileNextBtn.addEventListener('click',function(){
+            if(!mobileNextBtn.disabled) goPage(3);
+        });
+    }
+
+    // 商品大图预览：点击商品图打开，预览层支持左右按钮和左右滑动
+    const previewMask=document.getElementById('imagePreviewMask');
+    const previewImage=document.getElementById('previewImage');
+    const previewCurrent=document.getElementById('previewCurrent');
+    const previewTotal=document.getElementById('previewTotal');
+    const previewCloseBtn=document.getElementById('previewCloseBtn');
+    const previewPrevBtn=document.getElementById('previewPrevBtn');
+    const previewNextBtn=document.getElementById('previewNextBtn');
+    const galleryImages=Array.from(document.querySelectorAll('#swiperWrap .swiper-slide img'));
+    let previewIndex=0;
+    let previewTouchStartX=0;
+    let previewTouchStartY=0;
+    let previewTouching=false;
+    let lastPreviewSwitchTime=0;
+    const PREVIEW_THRESHOLD=80;
+    const PREVIEW_COOLDOWN=430;
+
+    // 震动反馈：只保留设备真实震动，不让图片产生晃动
+    function strongHapticFeedback(type){
+        const patterns={
+            tap:[90],
+            switch:[95,45,95],
+            swipe:[110,55,110],
+            preview:[120,60,120],
+            close:[70]
+        };
+        const pattern=patterns[type] || patterns.tap;
+
+        if(navigator.vibrate){
+            try{ navigator.vibrate(pattern); }catch(e){}
+        }
+
+    }
+
+
+    function previewCanSwitch(){
+        return Date.now()-lastPreviewSwitchTime>PREVIEW_COOLDOWN;
+    }
+
+    function playPreviewFeedback(){
+        if(!previewMask) return;
+        previewMask.classList.add('is-changing');
+        window.setTimeout(function(){
+            previewMask.classList.remove('is-changing');
+        },230);
+    }
+
+    function updatePreviewImage(nextIndex){
+        if(!previewMask || !previewImage || galleryImages.length===0) return;
+        if(!previewCanSwitch()) return;
+
+        previewIndex=(nextIndex+galleryImages.length)%galleryImages.length;
+        lastPreviewSwitchTime=Date.now();
+        strongHapticFeedback('switch');
+
+        const targetImg=galleryImages[previewIndex];
+        previewImage.src=targetImg.src;
+        previewImage.alt=targetImg.alt || '商品大图预览';
+
+        if(previewCurrent) previewCurrent.textContent=previewIndex+1;
+        if(previewTotal) previewTotal.textContent=galleryImages.length;
+
+        // 同步底层商品图进度，确保大图里看过也算浏览过
+        idx=previewIndex;
+        viewed.add(idx);
+        if(swiperWrap) swiperWrap.style.transform='translateX(-'+(idx*100)+'%)';
+        updateGalleryUI();
+
+        playPreviewFeedback();
+    }
+
+    function syncPreviewToGallery(){
+        if(previewMask && previewMask.classList.contains('active')){
+            updatePreviewImage(idx);
+        }
+    }
+
+    function openPreview(startIndex){
+        if(!previewMask || galleryImages.length===0) return;
+        previewIndex=startIndex;
+        lastPreviewSwitchTime=0;
+
+        previewMask.classList.add('active');
+        previewMask.setAttribute('aria-hidden','false');
+        document.body.classList.add('preview-open');
+        strongHapticFeedback('preview');
+
+        updatePreviewImage(previewIndex);
+    }
+
+    function closePreview(){
+        if(!previewMask) return;
+        strongHapticFeedback('close');
+        previewMask.classList.remove('active');
+        previewMask.setAttribute('aria-hidden','true');
+        document.body.classList.remove('preview-open');
+    }
+
+    galleryImages.forEach(function(img,i){
+        img.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            openPreview(i);
+        });
+    });
+
+    if(previewCloseBtn){
+        previewCloseBtn.addEventListener('click',closePreview);
+    }
+
+    if(previewPrevBtn){
+        previewPrevBtn.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            updatePreviewImage(previewIndex-1);
+        });
+    }
+
+    if(previewNextBtn){
+        previewNextBtn.addEventListener('click',function(){
+            strongHapticFeedback('tap');
+            updatePreviewImage(previewIndex+1);
+        });
+    }
+
+    if(previewMask){
+        previewMask.addEventListener('click',function(e){
+            if(e.target===previewMask){
+                closePreview();
+            }
+        });
+
+        previewMask.addEventListener('touchstart',function(e){
+            if(!e.touches || !e.touches[0]) return;
+            previewTouchStartX=e.touches[0].clientX;
+            previewTouchStartY=e.touches[0].clientY;
+            previewTouching=true;
+        },{passive:true});
+
+        previewMask.addEventListener('touchend',function(e){
+            if(!previewTouching || !e.changedTouches || !e.changedTouches[0]) return;
+            previewTouching=false;
+
+            const dx=e.changedTouches[0].clientX-previewTouchStartX;
+            const dy=e.changedTouches[0].clientY-previewTouchStartY;
+
+            if(Math.abs(dy)>Math.abs(dx)*0.85) return;
+            if(Math.abs(dx)<PREVIEW_THRESHOLD) return;
+
+            if(dx<0){ strongHapticFeedback('swipe'); updatePreviewImage(previewIndex+1); }
+            if(dx>0){ strongHapticFeedback('swipe'); updatePreviewImage(previewIndex-1); }
+        },{passive:true});
+    }
+
+    document.addEventListener('keydown',function(e){
+        if(!previewMask || !previewMask.classList.contains('active')) return;
+
+        if(e.key==='Escape') closePreview();
+        if(e.key==='ArrowLeft') updatePreviewImage(previewIndex-1);
+        if(e.key==='ArrowRight') updatePreviewImage(previewIndex+1);
+    });
+
+    updateGalleryUI();
+
+    // 数据存储设置
+    // 当前版本提交到 Supabase 表：data05_2
+    // 本版新增字段：web_fatigue / web_irritated / web_annoyed / web_bored
+    const DATA_TABLE_NAME='data05_2';
+    const SUPABASE_URL='https://qjzrwckvxclhggxmswxb.supabase.co';
+    const SUPABASE_ANON_KEY='sb_publishable_Y6hI01bl-qy7qwfNgBPmCw_szb-7rhK';
+
+    function getRadioValue(name,asNumber){
+        const el=document.querySelector('input[name="'+name+'"]:checked');
+        if(!el) return null;
+        return asNumber ? Number(el.value) : el.value;
+    }
+
+    function getInputValue(name,asNumber){
+        const el=document.querySelector('[name="'+name+'"]');
+        if(!el || el.value.trim()==='') return null;
+        return asNumber ? Number(el.value.trim()) : el.value.trim();
+    }
+
+    function collectSurveyData(){
+        return {
+            table_name:DATA_TABLE_NAME,
+            submitted_at:new Date().toISOString(),
+
+            // 第 1 题：震动检测
+            check:getRadioValue('check'),
+
+            // 第 2 题：功效感知
+            efficacy_1:getRadioValue('efficacy_1',true),
+            efficacy_2:getRadioValue('efficacy_2',true),
+            efficacy_3:getRadioValue('efficacy_3',true),
+            efficacy_4:getRadioValue('efficacy_4',true),
+
+            // 第 3 题：身体稳定性感受
+            body_stability_1:getRadioValue('body_stability_1',true),
+            body_stability_2:getRadioValue('body_stability_2',true),
+            body_stability_3:getRadioValue('body_stability_3',true),
+
+            // 第 4 题：产品构成稳定性感受
+            product_structure_unstable_1:getRadioValue('product_structure_unstable_1',true),
+            product_structure_unstable_2:getRadioValue('product_structure_unstable_2',true),
+            product_structure_stable_1:getRadioValue('product_structure_stable_1',true),
+
+            // 第 5 题：产品净含量识别
+            feature_count:getRadioValue('ft',true),
+
+            // 第 6 题：网站浏览感受
+            web_fatigue:getRadioValue('web_fatigue',true),
+            web_irritated:getRadioValue('web_irritated',true),
+            web_annoyed:getRadioValue('web_annoyed',true),
+            web_bored:getRadioValue('web_bored',true),
+
+            // 第 7-8 题：人口统计特征
+            gender:getRadioValue('gender'),
+            age:getInputValue('age',true),
+
+            // 图片浏览行为
+            viewed_image_count:viewed ? viewed.size : null,
+            viewed_all_images:slides ? viewed.size>=slides : false,
+            current_image_index:typeof idx!=='undefined' ? idx+1 : null,
+
+            // 页面和设备信息
+            page_url:location.href,
+            user_agent:navigator.userAgent
+        };
+    }
+
+    function saveToLocalTable(record){
+        const oldRows=JSON.parse(localStorage.getItem(DATA_TABLE_NAME) || '[]');
+        oldRows.push(record);
+        localStorage.setItem(DATA_TABLE_NAME,JSON.stringify(oldRows));
+    }
+
+    async function saveToSupabase(record){
+        if(!SUPABASE_URL || !SUPABASE_ANON_KEY){
+            return {skipped:true};
+        }
+
+        const endpoint=SUPABASE_URL.replace(/\/$/,'')+'/rest/v1/'+DATA_TABLE_NAME;
+        const response=await fetch(endpoint,{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'apikey':SUPABASE_ANON_KEY,
+                'Authorization':'Bearer '+SUPABASE_ANON_KEY,
+                'Prefer':'return=minimal'
+            },
+            body:JSON.stringify(record)
+        });
+
+        if(!response.ok){
+            const errorText=await response.text();
+            throw new Error(errorText || '数据提交失败');
+        }
+
+        return {ok:true};
+    }
+
+    // 提交：本地备份 + 写入 Supabase
+    async function submit(){
+        const submitBtn=document.querySelector('.lottery-submit-box');
+        const record=collectSurveyData();
+
+        try{
+            if(submitBtn){
+                submitBtn.classList.add('is-saving');
+                submitBtn.textContent='正在提交...';
+            }
+
+            saveToLocalTable(record);
+            await saveToSupabase(record);
+
+            goPage(4);
+        }catch(err){
+            console.error('submit error:',err);
+            alert('提交时网络异常，数据已先保存在本地 '+DATA_TABLE_NAME+'。请确认 Supabase 表已添加新增字段。');
+            goPage(4);
+        }finally{
+            if(submitBtn){
+                submitBtn.classList.remove('is-saving');
+                submitBtn.textContent='提交并参与抽奖';
+            }
+        }
+    }
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"7939e04a4baf43c8b86a560f74aac60e","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
