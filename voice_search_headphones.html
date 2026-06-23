@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>语音搜索蓝牙耳机</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: #edf4ff;
+      color: #101827;
+      min-height: 100vh;
+    }
+    .phone-page {
+      display: none;
+      min-height: 100vh;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 24px 18px calc(24px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, #eaf3ff 0%, #f8fbff 42%, #ffffff 100%);
+    }
+    .phone-page.active { display: block; }
+    .header { padding-top: 38px; margin-bottom: 28px; }
+    .eyebrow { color: #2563eb; font-size: 13px; font-weight: 900; letter-spacing: .08em; margin-bottom: 10px; }
+    h1, h2 { margin: 0; }
+    h1 { font-size: 32px; line-height: 1.18; letter-spacing: -1px; }
+    .hint { margin: 13px 0 0; color: #65758b; line-height: 1.65; font-size: 15px; }
+    .search-area {
+      background: rgba(255,255,255,.95);
+      border: 1px solid #dceaff;
+      border-radius: 30px;
+      padding: 18px;
+      box-shadow: 0 18px 42px rgba(37, 99, 235, .13);
+    }
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      min-height: 62px;
+      border-radius: 22px;
+      background: #f2f7ff;
+      border: 1px solid #cfe0ff;
+      padding: 0 16px;
+      gap: 10px;
+    }
+    .search-icon { font-size: 21px; }
+    input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-size: 17px;
+      color: #0f172a;
+    }
+    input::placeholder { color: #94a3b8; }
+    button {
+      border: 0;
+      cursor: pointer;
+      font-weight: 850;
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button:active { transform: scale(.985); }
+    .voice-btn {
+      width: 100%;
+      margin-top: 18px;
+      height: 72px;
+      border-radius: 24px;
+      background: #2563eb;
+      color: white;
+      font-size: 18px;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, .28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .voice-btn:disabled { opacity: .55; cursor: not-allowed; }
+    .mic {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.2);
+      font-size: 20px;
+    }
+    .voice-btn.listening { background: #ef4444; animation: pulse 1s infinite; }
+    @keyframes pulse { 50% { transform: scale(1.025); } }
+    .search-btn {
+      width: 100%;
+      margin-top: 12px;
+      height: 54px;
+      border-radius: 19px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+    }
+    .status {
+      min-height: 44px;
+      margin: 14px 4px 0;
+      color: #2563eb;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .warning { color: #dc2626; }
+    .chips { display: flex; gap: 10px; overflow-x: auto; padding: 18px 2px 4px; }
+    .chip { white-space: nowrap; border-radius: 999px; background: #fff; border: 1px solid #dceaff; padding: 10px 14px; color: #475569; font-size: 14px; }
+    .result-top { display: flex; align-items: center; gap: 12px; padding-top: 22px; margin-bottom: 18px; }
+    .back-btn { width: 42px; height: 42px; border-radius: 15px; background: #fff; color: #2563eb; border: 1px solid #dbe7ff; font-size: 24px; }
+    .query-line { color: #64748b; margin-top: 4px; font-size: 14px; }
+    .product-list { display: grid; gap: 14px; padding-bottom: 22px; }
+    .product { display: grid; grid-template-columns: 88px 1fr; gap: 14px; background: white; border-radius: 24px; padding: 14px; box-shadow: 0 12px 30px rgba(31,80,160,.10); border: 1px solid #edf3ff; }
+    .image { min-height: 96px; border-radius: 19px; display: grid; place-items: center; font-size: 42px; background: linear-gradient(135deg, #dbeafe, #f8fafc); }
+    .info h3 { margin: 2px 0 6px; font-size: 17px; }
+    .desc { margin: 0; color: #64748b; line-height: 1.45; font-size: 13px; }
+    .price { font-size: 19px; font-weight: 900; color: #2563eb; margin-top: 9px; }
+  </style>
+</head>
+<body>
+  <main id="home" class="phone-page active">
+    <section class="header">
+      <div class="eyebrow">VOICE SEARCH</div>
+      <h1>你想找什么<br>蓝牙耳机？</h1>
+      <p class="hint">点击语音按钮，说出关键词；识别结果会自动显示在上面的搜索框里。</p>
+    </section>
+
+    <section class="search-area">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input id="searchInput" autocomplete="off" placeholder="语音识别结果会显示在这里" />
+      </div>
+      <button id="voiceBtn" class="voice-btn" type="button">
+        <span class="mic">🎙️</span>
+        <span id="voiceBtnText">点击开始语音识别</span>
+      </button>
+      <button id="searchBtn" class="search-btn" type="button">查看搜索结果</button>
+      <p id="status" class="status">提示：首次使用请允许麦克风权限。手机端建议用 Chrome/Edge 安卓浏览器；本地文件打不开时，请用 localhost 或 HTTPS 打开。</p>
+    </section>
+
+    <div class="chips">
+      <button class="chip" data-text="降噪蓝牙耳机">降噪蓝牙耳机</button>
+      <button class="chip" data-text="运动蓝牙耳机">运动蓝牙耳机</button>
+      <button class="chip" data-text="长续航蓝牙耳机">长续航蓝牙耳机</button>
+    </div>
+  </main>
+
+  <main id="results" class="phone-page">
+    <div class="result-top">
+      <button class="back-btn" onclick="showHome()" type="button">‹</button>
+      <div>
+        <h2>搜索结果</h2>
+        <div class="query-line">你搜索了：<strong id="queryText">蓝牙耳机</strong></div>
+      </div>
+    </div>
+    <section class="product-list" id="productGrid"></section>
+  </main>
+
+  <script>
+    const products = [
+      { name: 'AirPods Pro 2', icon: '🎧', price: '¥1,899', desc: '主动降噪、通透模式、空间音频，适合苹果用户日常通勤。' },
+      { name: 'Sony WF-1000XM5', icon: '🎶', price: '¥1,699', desc: '旗舰级降噪与音质，适合看重音乐体验和安静环境的人。' },
+      { name: 'Bose QuietComfort Earbuds', icon: '🔇', price: '¥1,599', desc: '舒适佩戴、强降噪表现，适合办公、飞机、高铁场景。' },
+      { name: 'JBL Tune Flex', icon: '⚡', price: '¥699', desc: '性价比高、低音有力，适合运动、健身和日常使用。' }
+    ];
+
+    const home = document.getElementById('home');
+    const results = document.getElementById('results');
+    const searchInput = document.getElementById('searchInput');
+    const queryText = document.getElementById('queryText');
+    const statusText = document.getElementById('status');
+    const voiceBtn = document.getElementById('voiceBtn');
+    const voiceBtnText = document.getElementById('voiceBtnText');
+    const searchBtn = document.getElementById('searchBtn');
+    const productGrid = document.getElementById('productGrid');
+
+    function setStatus(text, isError = false) {
+      statusText.textContent = text;
+      statusText.className = isError ? 'status warning' : 'status';
+    }
+
+    function renderProducts() {
+      productGrid.innerHTML = products.map(p => `
+        <article class="product">
+          <div class="image">${p.icon}</div>
+          <div class="info">
+            <h3>${p.name}</h3>
+            <p class="desc">${p.desc}</p>
+            <div class="price">${p.price}</div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function doSearch() {
+      const q = searchInput.value.trim() || '蓝牙耳机';
+      queryText.textContent = q;
+      renderProducts();
+      home.classList.remove('active');
+      results.classList.add('active');
+    }
+
+    function showHome() {
+      results.classList.remove('active');
+      home.classList.add('active');
+    }
+
+    searchBtn.addEventListener('click', doSearch);
+    searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        searchInput.value = chip.dataset.text;
+        setStatus('已填入搜索框：' + chip.dataset.text);
+      });
+    });
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isListening = false;
+
+    const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+
+    if (!SpeechRecognition) {
+      voiceBtn.disabled = true;
+      setStatus('这个浏览器没有语音识别接口，所以识别不了。请换安卓 Chrome/Edge，或在电脑 Chrome 用 localhost/HTTPS 打开测试。', true);
+    } else if (!isSecure) {
+      voiceBtn.disabled = true;
+      setStatus('语音功能需要 HTTPS 或 localhost 环境。请不要直接用普通 http 打开。', true);
+    } else {
+      recognition = new SpeechRecognition();
+      recognition.lang = 'zh-CN';
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      recognition.maxAlternatives = 1;
+
+      voiceBtn.addEventListener('click', () => {
+        if (isListening) {
+          recognition.stop();
+          return;
+        }
+        try {
+          searchInput.value = '';
+          isListening = true;
+          voiceBtn.classList.add('listening');
+          voiceBtnText.textContent = '正在听，点我停止';
+          setStatus('正在听，请对着手机说话……');
+          recognition.start();
+        } catch (err) {
+          isListening = false;
+          voiceBtn.classList.remove('listening');
+          voiceBtnText.textContent = '点击开始语音识别';
+          setStatus('启动失败：请刷新页面后再点一次语音按钮。', true);
+        }
+      });
+
+      recognition.onstart = () => {
+        isListening = true;
+        voiceBtn.classList.add('listening');
+        voiceBtnText.textContent = '正在听，点我停止';
+      };
+
+      recognition.onresult = event => {
+        let finalText = '';
+        let interimText = '';
+        for (let i = 0; i < event.results.length; i++) {
+          const text = event.results[i][0].transcript.trim();
+          if (event.results[i].isFinal) finalText += text;
+          else interimText += text;
+        }
+        const textToShow = finalText || interimText;
+        if (textToShow) {
+          searchInput.value = textToShow;
+          setStatus(finalText ? '识别完成，结果已放进搜索框。' : '正在识别：' + textToShow);
+        }
+      };
+
+      recognition.onerror = event => {
+        const map = {
+          'not-allowed': '麦克风权限被拒绝了。请在浏览器地址栏或系统设置里允许麦克风。',
+          'no-speech': '没有听到声音，请靠近手机麦克风再试一次。',
+          'audio-capture': '没有检测到麦克风，请检查设备麦克风权限。',
+          'network': '语音识别需要网络连接，请联网后再试。',
+          'service-not-allowed': '当前浏览器或环境不允许使用语音识别，请换 Chrome/Edge 或 HTTPS/localhost。'
+        };
+        setStatus(map[event.error] || ('语音识别失败：' + event.error), true);
+      };
+
+      recognition.onend = () => {
+        isListening = false;
+        voiceBtn.classList.remove('listening');
+        voiceBtnText.textContent = '点击开始语音识别';
+        if (!searchInput.value.trim()) {
+          setStatus('还没有识别到文字。请再点一次按钮，然后清楚说出关键词。');
+        }
+      };
+    }
+  </script>
+</body>
+</html>
